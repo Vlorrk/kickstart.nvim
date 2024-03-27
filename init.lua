@@ -30,6 +30,8 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
+-- Set the damn indent spacing
+vim.opt.tabstop = 4
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -51,8 +53,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.list = false
+--vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -66,6 +68,7 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 vim.keymap.set('n', '<leader>m', vim.cmd.Mason, { desc = 'Go to [M]ason' })
 vim.keymap.set('n', '<leader>f', vim.cmd.Format, { desc = '[F]ormat using LSP' })
+vim.keymap.set('n', '<leader>h', vim.cmd.Ex, { desc = 'Go [H]ome' })
 --  See `:help vim.keymap.set()`
 -- Set highlight on search, but clear on pressing <Esc> in normal modek
 vim.opt.hlsearch = true
@@ -585,7 +588,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
