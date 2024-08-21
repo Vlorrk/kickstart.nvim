@@ -69,6 +69,7 @@ vim.opt.scrolloff = 10
 vim.keymap.set('n', '<leader>m', vim.cmd.Mason, { desc = 'Go to [M]ason' })
 vim.keymap.set('n', '<leader>f', vim.cmd.Format, { desc = '[F]ormat using LSP' })
 vim.keymap.set('n', '<leader>h', vim.cmd.Ex, { desc = 'Go [H]ome' })
+vim.keymap.set('n', '<leader>t', vim.cmd.tabnew, { desc = 'Go [T]ab' })
 --  See `:help vim.keymap.set()`
 -- Set highlight on search, but clear on pressing <Esc> in normal modek
 vim.opt.hlsearch = true
@@ -184,7 +185,16 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
-
+  {
+    'MeanderingProgrammer/markdown.nvim',
+    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    config = function()
+      require('render-markdown').setup {}
+    end,
+  },
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
