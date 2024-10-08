@@ -144,6 +144,23 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function(bufnr)
+        local gitsigns = require 'gitsigns'
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- keymaps for navigation
+        map('n', '<leader>gn', function()
+          gitsigns.nav_hunk 'next'
+        end, { desc = 'Got to the next hunk' })
+        map('n', '<leader>gp', function()
+          gitsigns.nav_hunk 'prev'
+        end, { desc = 'Got to the previous hunk' })
+      end,
     },
   },
 
